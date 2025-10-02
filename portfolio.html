@@ -411,6 +411,133 @@
         box-shadow: 0 0 20px #60a5fa, 0 0 40px rgba(96, 165, 250, 0.5);
         z-index: -1;
       }
+
+      /* Slider Styles */
+      .project-slider {
+        overflow: hidden;
+        border-radius: 24px;
+        position: relative;
+      }
+
+      .project-slider-wrapper {
+        display: flex;
+        transition: transform 0.5s ease;
+      }
+
+      .project-slide {
+        min-width: 100%;
+        flex-shrink: 0;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        cursor: pointer;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(96, 165, 250, 0.8);
+        color: white;
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .slider-btn:hover {
+        background: #60a5fa;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .prev-btn {
+        left: 10px;
+      }
+
+      .next-btn {
+        right: 10px;
+      }
+
+      .slider-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .dot.active {
+        background: #60a5fa;
+        transform: scale(1.2);
+      }
+
+      /* Modal Styles */
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+
+      .close-modal:hover {
+        background: rgba(96, 165, 250, 0.2);
+        color: #60a5fa;
+      }
     </style>
   </head>
   <body class="bg-[#0a192f] text-white">
@@ -497,52 +624,68 @@
       </video>
 
       <!-- Text Content -->
-      <div class="text_content relative z-10 max-w-xl space-y-6 text-center md:text-left ml-0 md:ml-[120px] fade-in">
-        <p class="text-xl md:text-2xl font-light leading-tight text-white/80">
-          Hi, I'm Chenura<br />
-        </p>
-        <h1 class="typewriter text-[#60a5fa] text-6xl md:text-7xl font-bold leading-tight text-white py-2 -mt-3">UI/UX Designer</h1>
-        <p class="text-base md:text-sm text-gray-300 font-light">
-          Crafting intuitive, engaging, and human-centered digital experiences.
-        </p>
-        <div class="space-y-6 mt-2">
-          <a href="#contact" class="btn-primary inline-block">
-            Contact Me
-          </a>
-          
-          <!-- Social Media Icons -->
-          <div class="flex justify-center md:justify-start space-x-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 20.25c-2.458 0-4.467-2.009-4.467-4.467s2.009-4.467 4.467-4.467 4.467 2.009 4.467 4.467-2.009 4.467-4.467 4.467zm7.718 0c-2.458 0-4.467-2.009-4.467-4.467s2.009-4.467 4.467-4.467 4.467 2.009 4.467 4.467-2.009 4.467-4.467 4.467z"/>
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Behance">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
+      <div class="text_content relative z-10 max-w-xl mx-auto space-y-6 text-center md:text-left px-4 md:px-0 fade-in">
+  <!-- Intro Text -->
+  <p class="text-xl md:text-2xl font-light leading-tight text-white/80">
+    Hi, I'm Chenura<br />
+  </p>
+
+  <!-- Main Heading -->
+  <h1 class="typewriter text-[#60a5fa] text-5xl md:text-7xl font-bold leading-tight text-white py-2 -mt-3">
+    UI/UX Designer
+  </h1>
+
+  <!-- Tagline -->
+  <p class="text-base md:text-sm text-gray-300 font-light">
+    Crafting intuitive, engaging, and human-centered digital experiences.
+  </p>
+
+  <!-- Call to Action + Socials -->
+  <div class="space-y-6 mt-2">
+    <a href="#contact" class="btn-primary inline-block">
+      Contact Me
+    </a>
+
+    <!-- Social Media Icons -->
+    <div class="flex justify-center md:justify-start gap-4">
+      <!-- Facebook -->
+      <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12..."/>
+        </svg>
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.017 0C5.396 0 .029..."/>
+        </svg>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569..."/>
+        </svg>
+      </a>
+
+      <!-- Behance -->
+      <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Behance">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M22 7h-7v-2h7v2zm1.726..."/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 
       <!-- Image with glowing rectangle -->
       <div class="image-container">
         <img
           src="cover2.png"
           alt="Chenura"
-          class="w-[700px] md:w-[700px] h-[500px] md:h-[650px] object-cover rounded-lg mt-[50px]"
+          class="w-[700px] md:w-[700px] h-[500px] md:h-[650px] object-cover rounded-lg mt-[0px]"
         />
       </div>
     </section>
@@ -550,7 +693,7 @@
     <!-- Services Showcase with Endless Horizontal Scroll -->
     <section id="services-showcase" class="py-20 bg-[#1e293b] overflow-hidden fade-in">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold mb-2 text-white">Our UI/UX Services</h2>
+        <h2 class="text-4xl font-bold mb-2 text-white">Our Services</h2>
         <p class="text-lg text-gray-400 max-w-2xl mx-auto">Comprehensive design solutions for modern digital experiences</p>
       </div>
       
@@ -691,128 +834,166 @@
       </div>
     </section>
 
-    <!-- Portfolio first row -->
-<section id="portfolio" class="px-6 md:px-20 py-24 bg-[#0a192f] fade-in">
-  <div class="text-center mb-20">
-    <h2 class="text-4xl font-bold mb-6 text-white">Portfolio</h2>
-    <p class="text-lg text-gray-400 max-w-2xl mx-auto">A showcase of carefully crafted digital experiences that blend aesthetics with functionality</p>
-  </div>
-  
-  <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto">
-    <div class="portfolio-card group">
-      <div class="aspect-video overflow-hidden rounded-t-2xl">
-        <img
-          src="Aiden.png"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          alt="Slaito E-commerce Project"
-        />
+    <!-- Portfolio Slider -->
+    <section id="portfolio" class="px-6 md:px-20 py-24 bg-[#0a192f] fade-in">
+      <div class="text-center mb-20">
+        <h2 class="text-4xl font-bold mb-6 text-white">Portfolio</h2>
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">A showcase of carefully crafted digital experiences that blend aesthetics with functionality</p>
       </div>
-      <div class="portfolio-card-content">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-          <span class="text-sm text-gray-400 uppercase tracking-wider">E-commerce Platform</span>
+
+      <div class="max-w-7xl mx-auto relative">
+        <!-- Slider -->
+        <div class="project-slider">
+          <div class="project-slider-wrapper" id="projectSlider">
+            <!-- Project 1 -->
+            <div class="project-slide" onclick="openModal(1)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="Aiden.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="Aiden Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">E-commerce Platform</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Aiden: Mountain Bike Selling Platform</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-slide" onclick="openModal(2)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="CryptoX.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="Trading Broker Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">Mobile App</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Trading Broker Mobile App Design</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-slide" onclick="openModal(3)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="Aiden.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="FinTech Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">Web App</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">FinTech Dashboard</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-slide" onclick="openModal(4)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="CryptoX.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="Health App Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">Mobile App</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Health & Fitness Tracker</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-slide" onclick="openModal(5)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="Aiden.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="E-commerce Redesign Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">Web Design</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">E-commerce Store Redesign</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-slide" onclick="openModal(6)">
+              <div class="portfolio-card h-[600px]">
+                <div class="aspect-video overflow-hidden rounded-t-2xl">
+                  <img
+                    src="CryptoX.png"
+                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                    alt="Social Media Project"
+                  />
+                </div>
+                <div class="portfolio-card-content">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                    <span class="text-sm text-gray-400 uppercase tracking-wider">Web App</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white mb-3">Social Media Management Tool</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button class="slider-btn next-btn" onclick="changeSlide(1)">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
         </div>
-        <h3 class="text-2xl font-bold text-white mb-3">Aiden : Mountain Bike Seilling Platform</h3>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          Complete redesign of a local marketplace platform focusing on user experience optimization and modern interface design. Increased user engagement by 45% and conversion rates by 32%.
-        </p>
-        <a href="#" class="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors group">
-          View Case Study
-          <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
+
+        <!-- Dots -->
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal" onclick="closeModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <div id="modalBody"></div>
       </div>
     </div>
-
-    <div class="portfolio-card group">
-      <div class="aspect-video overflow-hidden rounded-t-2xl">
-        <img
-          src="CryptoX.png"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          alt="Sirilak Seafood Project"
-        />
-      </div>
-      <div class="portfolio-card-content">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
-          <span class="text-sm text-gray-400 uppercase tracking-wider">Mobile App</span>
-        </div>
-        <h3 class="text-2xl font-bold text-white mb-3">Trading Broker Mobile App Design</h3>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          Complete brand overhaul and website redesign for a premium seafood company. Created a sophisticated visual identity that reflects quality and freshness while improving online presence.
-        </p>
-        <a href="#" class="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors group">
-          View Case Study
-          <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Portfolio second row --> 
-  <div class="grid md:grid-cols-2 gap-12 max-w-7xl mx-auto mt-[80px]">
-    <div class="portfolio-card group">
-      <div class="aspect-video overflow-hidden rounded-t-2xl">
-        <img
-          src="Aiden.png"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          alt="Slaito E-commerce Project"
-        />
-      </div>
-      <div class="portfolio-card-content">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 bg-green-400 rounded-full"></div>
-          <span class="text-sm text-gray-400 uppercase tracking-wider">E-commerce Platform</span>
-        </div>
-        <h3 class="text-2xl font-bold text-white mb-3">Aiden : Mountain Bike Seilling Platform</h3>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          Complete redesign of a local marketplace platform focusing on user experience optimization and modern interface design. Increased user engagement by 45% and conversion rates by 32%.
-        </p>
-        <a href="#" class="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors group">
-          View Case Study
-          <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <div class="portfolio-card group">
-      <div class="aspect-video overflow-hidden rounded-t-2xl">
-        <img
-          src="CryptoX.png"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          alt="Sirilak Seafood Project"
-        />
-      </div>
-      <div class="portfolio-card-content">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
-          <span class="text-sm text-gray-400 uppercase tracking-wider">Mobile App</span>
-        </div>
-        <h3 class="text-2xl font-bold text-white mb-3">Trading Broker Mobile App Design</h3>
-        <p class="text-gray-300 leading-relaxed mb-6">
-          Complete brand overhaul and website redesign for a premium seafood company. Created a sophisticated visual identity that reflects quality and freshness while improving online presence.
-        </p>
-        <a href="#" class="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors group">
-          View Case Study
-          <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-          </svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-
 
     <!-- About -->
-    <section id="about" class="px-6 md:px-20 py-24 bg-(image:cover2.png) fade-in">
+    <section id="about" class="px-6 md:px-20 py-24 bg-[url('cover2.png')] bg-cover bg-center fade-in">
       <div class="max-w-7xl mx-auto">
         <div class="about-grid">
           <div>
@@ -915,6 +1096,56 @@
 
     <!-- Scripts -->
     <script>
+      // Projects Data
+      const projects = [
+        {
+          id: 1,
+          title: "Aiden: Mountain Bike Selling Platform",
+          category: "E-commerce Platform",
+          image: "Aiden.png",
+          description: "Complete redesign of a local marketplace platform focusing on user experience optimization and modern interface design. Increased user engagement by 45% and conversion rates by 32%."
+        },
+        {
+          id: 2,
+          title: "Trading Broker Mobile App Design",
+          category: "Mobile App",
+          image: "CryptoX.png",
+          description: "Complete brand overhaul and mobile app design for a trading broker. Created a sophisticated visual identity that reflects security and ease of use while improving online presence."
+        },
+        {
+          id: 3,
+          title: "FinTech Dashboard",
+          category: "Web App",
+          image: "Aiden.png",
+          description: "Interactive dashboard for financial analytics with real-time data visualization and user-friendly navigation. Enhanced decision-making for users."
+        },
+        {
+          id: 4,
+          title: "Health & Fitness Tracker",
+          category: "Mobile App",
+          image: "CryptoX.png",
+          description: "App design for tracking workouts, nutrition, and health metrics with personalized recommendations and gamification elements."
+        },
+        {
+          id: 5,
+          title: "E-commerce Store Redesign",
+          category: "Web Design",
+          image: "Aiden.png",
+          description: "Redesign of an online store to improve conversion rates and user satisfaction through better UX and responsive design."
+        },
+        {
+          id: 6,
+          title: "Social Media Management Tool",
+          category: "Web App",
+          image: "CryptoX.png",
+          description: "Tool for managing multiple social accounts with scheduling, analytics, and collaboration features for teams."
+        }
+      ];
+
+      // Slider Variables
+      let currentSlide = 0;
+      const totalSlides = 6;
+
       // Scroll Animation
       document.addEventListener("DOMContentLoaded", () => {
         const observer = new IntersectionObserver(
@@ -982,7 +1213,74 @@
             }
           });
         });
+
+        // Initialize Slider
+        showSlide(currentSlide);
+        createDots();
       });
+
+      function showSlide(index) {
+        const wrapper = document.getElementById('projectSlider');
+        wrapper.style.transform = `translateX(-${index * 100}%)`;
+        updateDots(index);
+      }
+
+      function changeSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        showSlide(currentSlide);
+      }
+
+      function createDots() {
+        const dotsContainer = document.getElementById('sliderDots');
+        for (let i = 0; i < totalSlides; i++) {
+          const dot = document.createElement('div');
+          dot.classList.add('dot');
+          dot.onclick = () => {
+            currentSlide = i;
+            showSlide(currentSlide);
+          };
+          dotsContainer.appendChild(dot);
+        }
+        updateDots(0);
+      }
+
+      function updateDots(index) {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      // Modal Functions
+      function openModal(id) {
+        const project = projects.find(p => p.id === id);
+        if (project) {
+          document.getElementById('modalBody').innerHTML = `
+            <img src="${project.image}" alt="${project.title}" class="w-full h-64 object-cover rounded-lg mb-6">
+            <h2 class="text-3xl font-bold text-white mb-4">${project.title}</h2>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+              <span class="text-sm text-gray-400 uppercase tracking-wider">${project.category}</span>
+            </div>
+            <p class="text-gray-300 leading-relaxed mb-6">${project.description}</p>
+            <a href="#" class="inline-flex items-center text-[#60a5fa] hover:text-white transition-colors">
+              View Case Study
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+              </svg>
+            </a>
+          `;
+          document.getElementById('projectModal').classList.add('active');
+        }
+      }
+
+      function closeModal(event) {
+        if (event && event.target.classList.contains('modal')) {
+          document.getElementById('projectModal').classList.remove('active');
+        } else {
+          document.getElementById('projectModal').classList.remove('active');
+        }
+      }
     </script>
   </body>
 </html>
